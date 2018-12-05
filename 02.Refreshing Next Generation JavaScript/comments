@@ -1,0 +1,215 @@
+
+This is an optional module just for reminding JS.
+
+
+"let" and "const" :
+    These keywords are for creating variables.
+    Before ES6 (EtmaScript 6) it was user "var".
+    Now there is "let" and "const".
+
+    "let" is for normal variables,
+    "const" is for vonstants that we never want to change. 
+
+    we cannot change a "const" variable.
+
+    "let" is local - lives in the scope that we have created it.
+    "var" is global - lives everiwhere and we cannot have 2 "var" variables with the same name.
+
+
+
+Arrow Functions :
+    It's a deferent sintax for a JS function.
+
+    function myFunc() {
+        . . .
+    }
+
+    const myFunc = () => {
+        . . .
+    }
+
+    The "this" keyword does not change if working with arrow functions.
+
+    If we have only one parameter we do not need the  parentesies "()" :
+        const f = name => { . . .}
+
+    There is a short way to write the Arrow functions all on one line: 
+        const f = (name, age) => return "Name : " + name + " " + "Age : " + age;
+
+
+
+
+
+
+IMPORT AND EXPORT :
+    We can import code from another file into this one.
+    We can use the default keyword for normal export only if we export only one thing from a file.
+    If we need to export many things from one file we just use the "export" keyword.
+
+
+const person = {
+    name : "Nasko",
+    age : 25
+}
+
+
+
+    //we can export many things at once, functions as well
+export const clean = () => {
+    console.log("Cleaned ...");
+}
+
+export const number = 10;
+
+
+
+
+
+
+
+There are many ways to do this :
+    import { Something } from './FileName';
+
+    import * from './FileName';   // Now we export everything from that file insade an object.
+
+    import { Something  as MyName} from './FileName';  // this way we import it an set a name that we want to it.
+
+
+
+
+
+
+
+CLASSES :
+    A class can have functions properties or objects.
+    We use the "new" keyword to create an instance of a class.
+    A class can inherit another class with the "extend" keyword and to inherit the properties we need 
+    the super(); keyword.
+
+
+    //We can declare properties outside the constructor
+    SocialSecurity = 245512552; 
+
+    
+    //We can have a property that stores a function s a value
+    //We need to use an arrow function so the "this" keyword do not bother us.
+    printSocialSecurity = () => {
+        console.log("Social security is : " + this.SocialSecurity);
+    }
+
+
+TO USE THIS NEW SINTX WE NEED BABEL !!!!
+
+
+
+
+
+Spread and Rest operators :
+    There is only one operator " ... "
+    the Spread and Rest depend on when we use that operator.
+
+
+    SPREAD :
+
+        If we use it in an array we simply take out it's elements:
+        let array = [1,2,3]
+        let newArray = [...array, 4,5]
+
+
+        we can copy an object and change some properties insade at the same time:
+        let obj = { name : "Nasko", age : 24 };
+
+        let newObj = { ...obj, name : "Atanas" };  //we copy the obj object but with deferent "name" property 
+
+
+
+
+    REST :
+        This is the same operator " ... " but used in a functions parameters.
+        It means that we can have many parameters but we only wright "...args", it receives them as an array.
+        
+
+    function myFunc2(...args) { //we only write ...args but we can have many arguments
+        console.log(args.join(", ")) //we can treat it as an array
+    }
+
+
+    myFunc2(true, "Param2", 55, 12.21, [1,2,3]);
+
+
+
+
+
+
+
+Destructing :
+    It's similar to the "Spread" operator but it works in a deferent way.
+    The "Spread operator ...array"  takes all the elements from an array and distributes them in another array.
+    Destructing takes out only one element of an array or a property from an object and distributes them into a new object.
+    We can spread them into variables.
+
+
+
+
+
+
+
+Primative (value) tipes, and reference types :
+
+//Number, Strings and Booleans are primitive types, when we assign it's values into another variable it makes a copy of it. 
+const mynumber = 2;
+
+//when we set another variable to it, it's actually making a copy of it.
+const mynumber2 = mynumber; 
+
+
+
+//objects and arrays are reference types.
+//They get stored into the memory and pointers get stored in the variables
+const person2 = {
+    name : 'Max'
+}
+
+const person3 = person2;
+//now the person2 and person3 store pointers to the same object in the memory.
+
+//if we change one of them, both will change.
+person2.name = "Alex";
+
+
+//The same goes for arrays:
+const array2 = [1,2,3];
+const array3 = array2;
+
+//if we change one they will both change.
+array2.push(4);
+
+
+//TO COPY AN OBJECT OR ARRAY IN A PRIMITIVE WAY WE NEED THE Spread Operator.
+const array4 = [...array2];
+array2.push(5);
+
+console.log(array4); //the array4 stays the same even if we changed the array2. 
+
+
+const person4 = {
+    ...person3
+}   
+
+person3.name = "Jake";
+
+console.log(person4); //the name is still Alex even if we chnged it to Jake.
+
+
+
+
+
+
+
+
+
+
+
+
+
+

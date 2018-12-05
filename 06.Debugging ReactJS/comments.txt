@@ -1,0 +1,67 @@
+---------------------
+
+
+Error Messages:
+    When we have an error messate, ReactJS shows us the line where and the reason.
+    We nee d to read them and understand them.
+
+
+---------------------
+
+
+Logical errors:
+    Sometimes we don't get an error message but something is not working.
+    Finding Logical errors can be done by using the browser's developer tools.
+
+
+---------------------
+
+
+React Developer Tools:
+    There is a chrome plugin which debugs our JSX code and we can even see the state 
+    and props of our components. 
+    It makes it very easy to inspect our code, we can inspect all the components insad each other.
+
+
+----------------------
+
+
+Error boundaries:
+    Sometimes we need to throw our own created custom errors.
+    We can throw errors with :  
+        throw new Error("Error message here !");
+
+    We use this because sometimes we fetch information from servers and we cannot guarantee
+    that the information will be delivered to us, so we need to throw a custom error to inform the user.
+
+    We can create a special component for handelling errors.
+
+    Check the ErrorBoundary Component, there is explanations there.
+
+    TO USE THIS COMPONENT WE NEED TO WRAP IT AROUND THE COMPONENT WHICH WE THINK IT 
+    WILL FAIL, AND FROM THERE WE CAN CATCH AN ERROR WITH  componentDidCatch() IF THE 
+    CODE FAILS.
+
+
+    We need to move the key proeprty to the wrapping component because is the outside 
+    component.
+
+
+    IMPRTANT :
+        IN DEVELOPMENT MODE IT MIGHT NOT SHOW THE ERROR COMPONENT, BUT WHEN WE UPLOAD IT TO A REAL SERVER WE WILL 
+        SEE IT.
+
+
+    IMPORTANT:
+        ONLY USER CUSTOM ERROR COMPONENT WHEN YOU THINK YOU HAVE SOME CODE THAT MAY 
+        FAIL AT SOME POINT IN TIME. 
+
+
+----------------------
+
+
+Wrap up:
+    01.We learned how to read Error Messages from ReactJS.
+    02.Solve logical errors, use chrome developer tools.
+    03.Use ErrorBoundaries components which we use to catch errors from components that may fail.
+

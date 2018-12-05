@@ -1,0 +1,205 @@
+
+There is more from styling than what we have seen so far.
+
+We have seen 3 ways : 
+    01. Inline styling - creating an object with properties and apply that object to a JSX element.
+    02. A .css file - creating a .css file and importing it so we can use it.
+    03. Global styling - a .css file in which we can put all our styles affecting all parts the app.
+
+There are other ways to deal with styling.
+
+We can change the style object which holds all the styles in the if statement simply like this :
+      
+    const style = {
+      backgroundColor : 'red',
+      color : 'white',
+      font : 'Ariel',
+      border : '1px solid black',
+      padding : '16px',
+      cursor : 'pointer'
+    }
+
+    if(...){
+
+      style.backgroundColor = 'green';
+    }    
+
+
+-----------------------------------
+
+
+Setting dinamic Style classes names :
+    WE CAN STYLE CLASSES IN THE .CSS FILE AND THAN USE THEM ON SOME ELEMENTS :
+
+        .red {
+            background-color: red;
+        }  
+
+        .bold {
+            font-weight: bold;
+        }
+
+        AND THEN APPLY THEM TO JSX ELEMENTS !!!
+
+
+------------------------------------
+
+
+We can join the classes into one string, assign it to a variable and use it as a class like this:
+
+let paragraphClasses = [];
+
+if(this.state.people.length > 2){
+  paragraphClasses.push('bold')
+}
+
+if(this.state.people.length > 1){
+  paragraphClasses.push('red')
+}
+
+paragraphClasses = paragraphClasses.join(' ')
+
+<p className={classes}>Some text !</p>
+
+
+WHIS WAY WE LEARNED HOW TO DINAMICALY SET A LIST OF CSS CLASSES INTO AN ARRAY AND THEN APPLY IT 
+ON AN JSX ELEMENT.
+
+
+-----------------------------------
+
+
+Setting classes dinamically:
+    It's similar to the previous example where we set style classes to our JSX elements.
+    We can also change elements values by storing them into variables.
+
+
+--------------------------------
+
+Assigning sudo selectors like hover effects and media queries on inline styling:
+    These effects are no allowed on inline styling by React but we can install a new package.
+    
+    It's called 'radium'.
+    npm install --save radium
+
+    By using --save we will see it in the packaje.json file
+
+
+    To use 'radial' we have to import it :
+        import Radial from 'radial';
+    And then export our component by wrapping it in Radial() like this:
+
+    export default Radial(App);
+
+    Now we can use sudo selectors like hover effects and media queries on inline styling !
+    Radium it's al about styling.
+
+IMPORTANT :
+    THIS IS CALLED A HIGHER ORDER COMPONENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    IT'S JUST A COMPONENT WRAPING OUR COMPONENT AND IT'S ADDING MRE FUNCTIONALITIES TO IT.
+    WE WILL CREATE THOSE LATER IN THE COURSE.
+    IT'S NOT THAT DIFFICULT !!!
+
+    
+
+With this libraty we can add hover state on inline styling like this :
+const style = {
+      backgroundColor : 'green',
+      color : 'white',
+      font : 'Ariel',
+      border : '1px solid black',
+      padding : '16px',
+      cursor : 'pointer',    //STARTS HERE
+      ':hover': {
+        backgroundColor : 'lightgreen' ,
+        color : 'black'
+      }
+    }
+
+ 
+ To change the hover state later on we can do :
+ style[':hover'] = {
+    backgroundColor : 'lightcoral',
+    color:'black'
+  }
+
+
+
+-----------------------------
+
+
+Media queries on inline styling with Radium library:
+    
+        We need to import a styleRoot component.
+
+        import Radial, { StyleRoot } from 'radial';
+
+        THEN WE NEED TO WRAP ALL THE return() STATEMENT INTO <StyleRoot></StyleRoot> CLASS.
+        OR JUST THE ELEMENT THAT USES THAT inline @media query !!!!!
+
+        //media query with Radial
+        const style = {
+            '@media (min-width: 500px)': {
+                width : '450px'
+            }
+        }
+
+    Obviously we can do this on our .css class without Radial if we want !!!
+
+
+
+------------------------
+
+
+
+CSS Modules :
+    This is used for having some styles only for one component which does not override
+    other styles and they to not apply for other components.
+
+    We have to destroy the default css configuration and create a new webpack configuration.
+    It's not an easy process but it's possible.
+
+    When we are done with the configuration we need to restart our project otherwise it wont work.
+
+    With CSS modules, you can write normal CSS code and make sure, that it only applies to a given component
+    https://github.com/css-modules/css-modules
+
+
+    IMPORTANT :
+        We can use css like classes:
+        
+        import classes from './Post.css';
+ 
+        const post = () => (
+            <div className={classes.Post}>...</div>
+        );
+
+
+        THE .css File:
+        
+        .Post {
+            color: red;
+        }
+
+
+
+-----------------------
+
+
+    Adding Pseudo Selectors and Media queries:
+        We know this already !!!
+
+
+-----------------------
+
+
+
+
+
+
+
+
+
+
+
+

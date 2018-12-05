@@ -1,0 +1,427 @@
+
+
+----------------------
+
+
+We can split our app into more components.
+We can create a PersonsList Component which receives all people and then
+in the App component we use the PersonsList component.
+
+We can move the Person Component folder into the Persons component folder !!!
+
+We can have a components and assets folders
+
+
+We put the App component into a 'containers' folder.
+
+The point is to split the app into many components.
+Use as much functuinal-based components as you can.
+
+
+--------------------------
+
+
+Stateless and Statefull components:
+
+    Statefull components are class based components which have a state AND HAVE 
+    LIFECICLE HOOKS.
+
+    Stateless componnents are function-based components which cannot manage state AND DON'T
+    HAVE LIFECICLE HOOKS.
+
+    Use function based components as offten as you can because they are more simple and clear.
+    It gets harder to manage state in every components.
+
+
+--------------------------
+
+
+Components Lifecicle:
+    They are the proccess of running a component.
+    We can write our code before, after or in the middle of a component's execution,
+    AND MORE : 
+
+    There are lots of lifecicles:  
+        constructor() - This goes first, we use super(props); to call the constructor of the parent class.
+        componentWillMount() - This is from reactJS and goes after the constructor,
+        componentWillReceiveProps(),
+        shouldComponentUpdate(),
+        componentWillUpdate(),
+        componentDidUpdate(),
+        componentDidCatch(),
+        componentDidMount() - This runs after the component was mounted successfully,
+        componentWillUnmount() - This gets executed right before a component is removed.,
+        render() - This is executed last, after constructo and componentWillMount()
+
+
+    WE NEED A STATEFULL (CLASS BASED COMPONENTS) TO USE THIS.
+
+
+--------------------------
+
+
+    Lifecicle in action:
+
+        This is how we pass the props to a component:
+        constructor(props){
+            super(props);
+        }
+
+        WE CAN INITIALIZE STATE INSADE THE CONSTRUCTOR, IT WORKS IN MOST NEW PROJECTS,
+        THIS IS A NEW THING IN REACTJS.
+
+        constructor(props){
+            super(props);
+            this.state = { ... }
+        }
+
+
+
+        THE ORDER GOES LIKE THIS:
+
+        constructor(props){
+            super(props);
+            console.log("01. Constructor()");
+        }
+
+        componentWillMount(){
+           console.log('02. ComponentWIllMount()');
+        }
+
+        render(){
+            console.log('03.render()');
+        }
+
+        componentDidMount(){
+           console.log('04.ComponentDidMount()');
+        }
+
+
+-----------------------
+
+
+Updating Lifecicles :
+    
+
+  //This activates when we receive props for this component.
+  componentWillReceiveProps(newxtProps){
+    console.log("[UPDATE Person.js] componentWillReveiveProps : " + JSON.stringify(newxtProps))
+  }
+
+  //This method checks if we should update our component and it return
+  //true or false, if it returns false it stops the proccess of updating.
+  shouldComponentUpdate(nextProps, nextState){
+    console.log("[UPDATE Person.js] shouldComponentUpdate : " + JSON.stringify(nextProps) + " state : " + JSON.stringify(nextState))
+    
+    //Sometimes we dont want to update the component so we return false
+    let result = nextProps.persons == this.props.person; 
+  
+    return result;
+  }
+
+
+  //Here we know we will update, this comes after shouldComponentUpdate(){}
+  componentWillUpdate(nextProps, nextState){
+    console.log("[UPDATE Person.js] componentWillUpdate : " + JSON.stringify(nextProps) + " state : " + JSON.stringify(nextState));
+  }
+
+  //This comes after the component was updated
+  componentDidUpdate(){
+    console.log("[UPDATE Person.js] componentDidUpdate : " + JSON.stringify(nextProps) + " state : " + JSON.stringify(nextState));
+  }
+
+
+-------------------------
+
+
+Updating Lifecicle Hooks Triggared By the State :
+    The changes triggered by the state change will run first.
+    This happens because the stateChange is the first thing that happens.    
+
+
+------------------------
+
+
+PureComponent :
+    This comes from ReactJS, instead of extending Component we need to extend PureComponent.
+    
+    It's a very similar object from the normal Component only it has the 'shouldComponentUpdate()' 
+    lifecicle build in.
+
+    Meaning it compares the new props and state to the old versions and it continues updating if it 
+    detects deferences.
+
+    DON'T USE PureComponents EVERYWHERE, USE THEM ONLY WHERE YOU KNOW THAT UPDATES WILL NOT 
+    BE REQUIRED OR WE WANT 100% TO UPDATE OUR COMPONENT.
+
+
+------------------------
+
+
+How ReactJS updates the DOM ?
+    Changes in a ReactJS app happen from TOP to BOTTOM and ONLY IF props OR state ARE CHANGED !!!
+
+    Components or Child Components change only if the state or props change.
+
+    This info can give us a better idea of which components extend the PureComponent object.
+
+
+-----------------------
+
+
+ReactJS DOM Tree Update:
+    There is a deference between changing the DOM and just calling the render(){} method !!!
+    The render() method can be called and we can have the same HTML in the DOM !!!
+
+
+IMPORTANT !!!
+How ReactJS updates the DOM ?
+    ReactJS HAS AN OLD VITRUAL DOM AND IT COMPARES IT TO THE FUTURE RERENDERED VIRTUAL DOM.
+    IT CHECKS FOR DEFERENCES IN THE OLD DOM AND THE NEW DOM.
+    
+    If it finds deferences it updates the REAL DOM where the deferences are detected.
+    If there are no deferences between them it does not touch the REAL DOM. 
+
+    UPDATING THE DOM IS A SLOW PROCESS SO REACTJS HAS THIS SYSTEM OF USING 
+    AN OLD DOM AND A NEW DOM SO THE REAL DOM IS TOUCHED ONLY IF NEEDED.
+
+    ReactJS updates only the parts that change on the DOM, that's why we do NOT see the full DOM 
+    FLASH.
+
+
+--------------------
+
+
+Returning Adjacent Elements (React 16+):
+    Components can return only one element or AN ARRAY OF ELEMENTS.
+    But you cannot return more than one element next to eachother.
+
+
+-------------------
+
+
+Higher Order Components:
+    They wrap other components to add a new functionality to it.
+    They are used alot in ReactJS.
+    Many packages are build by using HOC ( Higher Order Components )  !!!!!
+
+--------------------
+
+
+Passing full props object:
+    To pass the props as we get them to a component we need to use the spread operator {...props}  !!!!!
+
+
+--------------------
+
+
+Using setState({}) Correctly :
+    There is another way to set the state, it's a functional way:
+        
+        this.setState((prevState, props) => {
+            return {
+                ...
+            }
+        })
+
+
+---------------------
+
+Better way to handle 'props' :
+    We can CHECK the TYPES of the incoming 'props' to make sure they are numbers, strings, booleans or other !!!
+    
+    There is an extra package that we need to add called 'prop-types'.
+    We need to add it with npm from the terminal.
+
+INSTALL:
+    npm install --save prop-types
+
+IMPORT:
+    import PropTypes from 'prop-types';
+
+USAGE: 
+    We declare it right before we export the class:
+
+        //HERE WE CHECK ALL TYPES OF OUR props OBJECT. 
+        //There are more detailed options to check parameters of functions and more.
+
+        Person.propTypes = {
+            name: PropTypes.string,
+            age: PropTypes.number,
+            change: PropTypes.func,
+            delete: PropTypes.func,
+        }
+
+    NOW IF WE PASS THE WRONG TYPE OF PARAMETER IT WILL GIVE US AN ERROR IN THE CONSOLE !!!
+
+
+--------------------
+
+
+'ref' attribute :
+    There is a special attribute called 'ref' which is used to pass reference to input fields:
+    It's like the 'key' attribute !!! 
+    It takes a function as a value !!!
+    Only it creates a new property for the entire class and sets it value to the input value !!!!
+    
+    ref={(input) => {this.myInputElement = input}}
+    IN THIS CASE WE CREATE A PROPERTY myInputElement WHICH HAS A VALUE = TO THE INPUT VALUE.
+
+    ACTUAL USAGE:
+        <input 
+            ref={(input) => {this.myInputElement = input}}
+            type="text" 
+            onChange={(e) => {
+                return this.props.change(e.target.value, this.props.index)
+            }}
+            placeholder={this.props.name} 
+        />
+
+
+    SO 'ref' IS A SPECIAL KEYWORD WHICH CREATES A NEW PROPERTY FOR OUR CLASS AND SETS IT'S VALUE TO 
+    THE VALUE OF THE INPUT FIELD WHICH WE WANT TO USE IT ON.
+    IT WORKS ONLY ON CLASS-BASED COMPONENTS AND WE CAN USE THEM IN LIFECIVCLES !!!!
+    WE CAN USE THEM NOT ONLY IN INPUT FIELDS AND DO NOT USE THEM FOR STYLING !!!
+
+IMPORTANT:
+    The function .focus() is for setting the focus on an input field !!! 
+
+
+------------------------
+
+
+There is a new Reference API agged since ReactJS 16.3.0 !!!
+Basically we can set references simply by using the React.createRef(); 
+on an element !!!
+
+Then we still have to use the 'ref' attribute to se t this reference !!!
+This is used when we want to call a function from the parent component !!!
+
+We need to use 'current' on the element we want to work with !!!
+    this.myInputElement.current.focus();
+
+
+WE BASICALLY CALL A FUNCTION FROM THE OUTSIDE OF THIS COMPONENT !!!
+
+
+IMPORTANT :
+    If we are using a HOC ( Higher Order Component ) which wraps our current component
+    we need to use the React.forwardRef(() => { . . . })  function insade our HOC.
+    
+    This function passes the reference to the HOC, but we need to pass it first from props  !!!!!
+
+    We will mostly use normal 'ref', we use forward refs only if we have a HOC component wrapping our component.
+
+
+----------------
+
+
+The RectJS 16.3 context API :
+    It passes global state in out app.
+    WE CAN DO THIS EASY BY PASSING REFERENCES BETWEEN COMPONENTS TRUOUT THE THREE.
+
+    BUT THERE IS A NEW BUILD IN FEATURE WHICH MAKES THIS ALOT EASYER.
+
+
+    CREATION:
+        //We create a new context with the new createContext() function from React 16.3
+        const AuthContext = React.createContext(false);
+
+    THIS BASICALLY CREATES A COMPONENT WE CAN USE IN JSX !!!
+
+    USAGE :
+        <AuthContext.provider value={this.state.authenticated}>
+            {people}
+        </AuthContext.provider>
+
+        //we pass in the value we want to work with
+
+
+        THERE IS A PROVIDER AND A CONSUMER:
+            <AuthContext.Consumer>
+                {auth => auth ? <p>Is authenticated !</p> : <p>Not authenticated !</p>}
+            </AuthContext.Consumer>
+
+
+        NOW WE CAN PASS DATA AROUND WITHOUT CREATING THIS BIG CHAIN OF PASSING PROPS !!!!
+        THIS IS USED MORE FOR GLOBAL SETTINGS !!!
+
+        BUT THE PASSING PROPS APPROACH IS MOSTLY USED !!!
+
+
+-----------------------
+
+
+    In ReactJS 16.6 was added a new feature to access the state from a 
+    child component even easyer !!!
+
+    This property is used only in class-based components.
+
+
+-----------------------
+
+Updated Lifecicle hooks :
+    There are more lifecicle hooks:
+        getDerivedStateFromProps(newxtProps, prevState){ ... }
+        
+        THIS LIFECICLE HOOK IS TRIGGERED WHEN OUR PROPS ARE UPDATED AND WE CNA 
+        UPDATE OUR STATE
+
+   USAGE:     
+  static getDerivedStateFromProps(nextProps, prevState){
+    console.log('[App] getDerivedStateFromProps ' + nextProps + " - " + prevState);
+    return prevState;
+  }
+
+    We need the 'static' keyword enfront of it.
+
+
+
+    //This is another new lifecicle hook which gives us a snapshot before our DOM right before it changes.
+    //It runs right before the DOM updates.  We need to return null !
+    getSnapshotBeforeUpdate(){
+        console.log('[App] getSnapshotBeforeUpdate()')
+        return null;
+    }
+
+    THIS RUNS BEFORE componentDidUpdate(){} HOOK.
+    We can use this to save the scrolling position of the user.
+
+
+    TO USE THE NEW LIVECICLE HOOKS WE NEED TO REMOVE THE componentWillMount AND componentWillUpdate HOOKS !!!
+
+                    
+
+---------------------------
+
+
+The "memo" Method :
+    This comes with React 16.6  !!!
+    With this we can optimize functional components and not only class-based components.
+
+    USAGE:
+        We just wrap our func-based component with the React.memo() function.
+        When we use the memo() function from React 16.6 the component is rerendered 
+        only when the props really change. 
+        This way we do not rerender it if nothing changes which is ALOT BETTER FOR PERFORMANCE.
+
+
+---------------------------
+
+
+Wrap Up:
+    We covered alot of stuff.
+    It's ok if we do not remember it all by memory.
+    We might not use all these concepts.
+
+    Try to remember : 
+    01.What is HOC, 
+    02.Lifecicle Hooks, 
+    03.PureComonents, 
+    04.PropertyTypes check, 
+    05.Passing references 
+    and more.
+
+
+
+

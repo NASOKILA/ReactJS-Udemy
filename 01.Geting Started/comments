@@ -1,0 +1,103 @@
+
+React is a library for User Interface.
+It works like a mobile app.
+We can split the page into components which we can reuse.
+We can reuse a component many times.
+
+React components can be just a function returning HTML, is uses JSX.
+
+ReactDOM library is needed to render the HTML returned from  a component.
+
+
+
+
+EXAMPLE : 
+
+.jsx file :
+
+function Person (props) {
+  return (
+    <div className="person">
+      <h1>{ props.name }</h1>
+      <p> Age :{ props.age }</p>
+    </div>
+  )
+}
+
+var app = (
+  <div>
+    <Person name="Atanas" age="25"/>
+    <Person name="Asen" age="32"/>
+  </div>
+)
+
+ReactDOM.render(app, document.querySelector('#app'));
+
+
+
+
+.html file : 
+
+<div id="app"></div>
+
+
+
+
+
+
+
+WHY USING REACT ? 
+    It's a build in front end framework which helps us build UI and it's easy to use.
+    By using just valila JavaScript it would be a nightmare.
+
+
+
+Alternatives to ReactJS are: 
+    Angular and Vue.js are great too.
+    Jquery is not, it's just for the DOM but the others allows us to create apps and their buisness and logic.
+
+
+
+SPA (Single Page App) and MPA (Multy Page App) :
+    In SPA :
+        01.We get only ONE HTML file from the Server i the beginning.
+        02.The page is split in the components and managed in JS and JSX.
+        03.Page does not need to reload !
+
+    In MPA :
+        01.We get many HTML files form the server.
+        02.Not everithing is managed by ReactJS.
+        03.Many parts of the page dont know of the existance of other parts.
+
+
+IMPORTANT :
+SPA is better to use than MPA !!!!!
+
+We will use the in the future.
+    01.The basics,
+    02.Debugging a ReactJS app,
+    03.Styling ReactJS Components,
+    04.Components advanced,
+    05.HTTP Requests in async way,
+    06.Routing is about parsing the URL and rearanging the components into the only one HTML file in a SPA app,
+    07.Forms and Validation,
+    08.Redux is an indipendent library for using only one state for all components,
+    09.Authentication for our ReactJS app front side and server side,
+    10.Testing,
+    11.Deployment to a real server,
+    12.Bonus section with Animations and more.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

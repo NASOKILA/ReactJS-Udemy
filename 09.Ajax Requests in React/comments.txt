@@ -1,0 +1,114 @@
+
+
+On a request we dont receive an html page, instead we receive a JSON object.
+
+Axios is a library for ajax request:
+    npm install axios --save
+
+
+Fake API for post:
+    http://jsonplaceholder.typicode.com/posts
+
+
+API http request are best made in the componentDidMount(){} lifecicle
+
+
+API is a server !!!!!
+
+
+--------------------------
+
+
+IMPORTANT :
+	Watch for how many requests are being send when loading the page.
+	Do not allow the application to constantly send countless requests to the server.
+
+
+--------------------------
+
+
+Interceptors:
+	Interceptors execute code globally.
+	They are global functions which get executed on every request or responce.
+	We have to create them in the most global file which is the index file this way it will affect all requsts.
+	We can use 'axios' to create them !!!
+
+
+Add an interceptor :
+			
+//REGISTER AN INTERCEPTOR, THIS IS A GLOBAL FUNCTION WHICH EXECUTES CODE FOR EVERY REQUEST OR RESPONCE IN OUR APP.
+axios.interceptors.request.use(request => {
+
+    console.log('REQUESTS INTERCEPTOR');
+    //we receive every request here     
+    console.log(request)
+    //WE have to return the request otherwise we are blocking it
+    return request;
+}, error => {
+    //We add another function to the interceptor to handle errors
+    console.log(error);
+    return Promise.reject(error);
+});
+
+
+
+
+//WE CAN ALSO SET AN INTERCEPTOR TO HANDLE EVERY RESPONSE IN OUR APP, HERE WE CAN TRACK EVERY RESPONCE THE SAME WAY
+axios.interceptors.response.use(response => {
+    	console.log('RESPONSE INTERCEPTOR');
+    	console.log(response);
+    	return response;
+	}, error => {
+    	console.log(error);
+    	return Promise.reject(error);
+	});
+
+
+REMOVE AN INTERCEPTOR :
+	To remove an interceptor we need to eject it like this :
+		axios.interceptors.request.eject(myInterceptor);
+
+        JUST STORE IN A VARIABLE BEFORE THAT.
+
+
+---------------------
+
+
+//WE CAN SET A DEFAULT URL FOR ALL REQUSETS
+axios.defaults.baseURL = "https://jsonplaceholder.typicode.com/";
+
+//WE CAN ALSO SET UP CONFIGURATIONS AND DEFAULT HEADERS FOR OUR APP.
+axios.defaults.headers.common['Authorization'] = "AUTH TOKEN";
+axios.defaults.headers.post['Content-type'] = "application/json";
+
+
+---------------------
+
+
+    INSTANCES :
+        We can have many axious objects with there own configurations and default baseURL's for the deferent parts of our application.
+
+        we just have to create another axios object :
+            let instance = axios.create({
+                baseURL : '. . .'
+            });
+
+
+---------------------
+
+
+Remove the interceptors for that page after the component mountes, otherwise they stay in the memory and nobody uses them !!!
+
+
+---------------------
+
+
+
+
+
+
+
+
+
+
+

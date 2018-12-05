@@ -1,0 +1,75 @@
+
+------------------
+
+
+How do we plan a ReactJS application ?
+
+01.Plan the Component tree, sometimes the ending result is deferent than the initial expectations.
+02.Plan the App state - in this case we need to add the ingredients and the final payment for the burger.
+03.Conteiners and Components - Which components should be stateless or statefull, container or not.
+
+Having a plan is important !!!
+
+
+--------------------
+
+
+Planning our App :
+
+The components and the state
+
+
+---------------------
+
+
+Build the new project and eject it from the terminal 
+with "npm run eject" for CSS purposes.
+
+
+---------------------
+
+
+Create folders for components:
+    "components" - will contain all "stateless" or "functional" components,
+    "containers" - will contain all "statefull" or "class based" components,
+    "hoc" - will contain Higher Order Components
+
+    IF WE ARE NOT USING JSX CODE WE DONT NEED TO IMPORT React from 'react' !
+
+
+---------------------
+
+
+Prop-types : 
+    Prop-types is a package which allow's us to set types of the value of the props that we 
+    will receive.
+    It was created by the React team.  
+
+Usage :
+    import PropTypes from 'prop-types';
+
+
+----------------------
+
+
+Backdrop :
+    A backdrop is when we click a button and we set a windowto pulp up,
+    we want some darker layer on the back over the full page.
+    That is a layout.
+
+    It's a simple div with a darker background color , 100% width and height so it can cover the 
+    full page on the back and we need a <-index on the css so it can be over of the the page
+    but the z-index has to be lower than the one on the window that pulped up.
+    
+    This way the window will stay over the backdrop and the backdrop will stay over the page on the back. 
+
+
+------------------------
+
+IMPORTANT !!!
+Updating elements:
+    The wrapping element CONTROLS how and when the wrapper element updates.
+    That is why we use the componentShouldUpdate(){} lifecicle to control which component updates.
+
+
+

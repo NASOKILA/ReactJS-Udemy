@@ -1,0 +1,143 @@
+
+-----------------------
+
+
+Rendering Content Conditionally :
+    Instead of changing something we want to show 
+    or hide something on a triggered event.
+    We can use a ternary operator for toggling sections of JSX code.
+
+    IMPORTANT : 
+        By using { } we can import JavaScript code into JSX code.
+
+
+    //HERE IF showPersons IT'S TRUE SHOW THE DIV, OTHERWISE DISPLAY null.
+        { this.state.showPersons 
+          ? <div>
+              <Person switch={this.switchName} 
+                name={this.state.people[0].name} 
+                age={this.state.people[0].age} 
+                change={this.changeName}>
+                Change all names from here : 
+              </Person>
+
+              <Person switch={this.switchName} 
+                name={this.state.people[1].name} 
+                age={this.state.people[1].age}> 
+              </Person>
+          
+              <Person switch={this.switchName} 
+                name={this.state.people[2].name} 
+                age={this.state.people[2].age}>
+                I am a woman
+              </Person>
+            </div>
+          : null
+    
+
+
+
+-----------------------
+
+
+    IMPORTANT:  
+        We can store this JSX code into a variable perform checks and then use that
+        variable into return().
+
+        This is a more elegant way to do this.
+
+
+    WE DECLARE AN EMPTY VARIABLE, PERFORM SOME CHECKS AND THEN ASSIGN JSX CORD AS IT'S VALUE.        
+    let people = null;
+
+    if(this.state.showPersons){
+      people = <div>
+      <Person switch={this.switchName} 
+        name={this.state.people[0].name} 
+        age={this.state.people[0].age} 
+        change={this.changeName}>
+        Change all names from here : 
+      </Person>
+
+      <Person switch={this.switchName} 
+        name={this.state.people[1].name} 
+        age={this.state.people[1].age}> 
+      </Person>
+  
+      <Person switch={this.switchName} 
+        name={this.state.people[2].name} 
+        age={this.state.people[2].age}>
+        I am a woman
+      </Person>
+    </div>
+    }
+
+
+BASICALLY WE HAVE A .js FILE WHICH HAS A FUNCTION render() WHICH RETURNS 
+JSX CODE, BUT IN THAT SAME JSX CODE WE CAN MIX IN .js CODE BY USING  { } 
+
+EVERITHING IS JavaScript !!!!!!!!!
+
+
+--------------------------
+
+
+Outputting Lists:
+    We will render list from our state dinamically with a for loop, 
+    a while loop or the build in JS  method .map(),
+    this way we can add and remove data from that list and they will 
+    display in the DOM !!!  
+
+
+--------------------------
+
+
+React does not have directives like ngFor ngIf like in Angular 2 +.
+HERE EVERITHING IS JavaScript we can simply use for or while loop !
+
+//WE WILL RENDER ALL THE PEOPLE FROM THE STATE DINAMICALLY :
+//remember that each element has to have a unique "key" property !
+//THIS KEY PROPERTY TELLS REACT TO UPDATE THE LIST WE ARE USING AND IT KEEPS TRACK OF IT'S ELEMENTS !!!!!!!!
+
+{this.state.people.map((person, index) => {
+      return <Person 
+      key={index}
+      switch={this.switchName} 
+      name={person.name}
+      age={person.age}
+      change={this.changeName}
+      >Change All Items from here :</Person>;  
+})}
+
+
+
+-------------------------
+
+
+
+Flexible lists :
+    To spread information from a list we can use the Spread operator "...List" enfront of a list.
+    Or we can use Object.Assign()
+
+
+
+-------------------------
+
+
+
+Wrap up :
+    We learned that we can mix JS code into JSX code with {}.
+    We can use a ternary operator to display, hide or change content. 
+    We know it's a good practice to store JSX into variables.
+    We learned we can use the Spreat operator '...' to take out all elements of a list.
+    To assign something to an object we can use Object.Assign({}, ...); . 
+    We can use forEach(), map(), splice() and more methods for lists.
+
+
+
+-------------------------
+
+
+myString.split('') or [...myString] splits a strng into an array of characters !
+array.join('') puts it back into a normal string !
+

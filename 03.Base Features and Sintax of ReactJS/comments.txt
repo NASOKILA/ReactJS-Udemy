@@ -1,0 +1,333 @@
+
+
+----------------
+
+
+How to build a local ReactJS project on our computer.
+
+Why use it ?
+because it is easyer to read the code and it runs faster.
+with React we can produce more, and faster.
+
+Dependencies :
+    npm and yarn
+    They are just build in packages that we use.
+
+
+Webpack bundler:
+    The 'bundler' bundles many files into one.
+    It also does some compiling before that.
+
+Babel + Presents Compiler :
+    Babel is a compiler that compiles the files in order to work on older brawsers.
+    Babel works with Webpack bundler.
+
+
+Development server:
+    We need a server to run the app on our machine.
+
+WHEN WE CREATE AN APP WITH REACT IT MAKES ALL THAT MANTIONED ABOVE ALREADY, ITS
+'create react app' TOOL.
+
+
+--------------------
+
+
+create react app: 
+    We can install it globally with npm on our comp.
+    To use npm we need node js.
+
+    We install the command globally :
+        npm install -g create-react-app
+
+    To create a React app we type :
+        create-react-app my-app 
+        It installs everithing it needs on its own.
+
+    To run the project we go into the folder and run npm start:
+        cd my-app
+        npm start
+
+    Once we run it, it works on a server on out machine.
+
+
+-----------------------
+
+
+We will learn the structure of a reactJS app:
+    The public, src folder, and the rest.
+    public - contains the most inportand index.html file. 
+    src - contains most important stuff
+        index.js file loads the App.js component into a div with a class 
+        'root' which is located into the index.html file. 
+
+    index.css file is for global css code.
+
+    App.js is the first component we get.
+
+    the .test.js files are for testing pourposes.
+
+
+----------------------
+
+
+We can use one main component App.js, and insade it load all other components 
+or use a router and load them there. 
+
+What is a component: 
+    A component is a class whick extends the Component class and it has a render() 
+    method for sure which renders everithing to the DOM.
+    Then we have to export that class in order to be used and imported by ither classes.
+    A component can be just a function which return s a JSX code, and that function can be  
+    a simple constant with a value of a function.
+    
+
+-------------------
+
+
+What is JSX ?
+    It is something invented by the ReactJS developers to allow us to mix html and js code easyer.
+    
+    Its NOT exactly HTML code, it's JSX code the one that we write into the render() method.
+    The files we have that end in .js, we can replace them with .jsx it will make no deference here.
+
+    React has a createElement() method taking ATLEAST 3 parameters.
+    JSX gets compiled into JS code THAT USES THE React METHOD createElement().
+
+
+-------------------
+
+
+JSX Restrictions:
+    The code that we write into the render() method its NOT html code, its JSX code.
+    WE CANNOT USE ClassName="" INTO AN HTML FILE.
+
+    We cannot return more than one element from the render() method.
+    But we can return json elements.
+
+    We have to return only one element with all other elements in it.
+
+    IMPORTANT TO REMEMBER:
+        ITS NOT HTML, ITS JSX CODE THE ONE IN THE render() METHOD OF A REACT COMPONENT
+        EVEN IF IT LOOKS AND WORKS LIKE IT. 
+
+
+------------------
+
+
+Creating a reactJS component:
+    We create a folder with Capital letter
+    Crete a .js file.
+
+A state allows us to change our component at runtime.
+
+
+------------------
+
+
+Components :
+    Advantages - We can split our code into many files, its easyer to mantain, 
+    it can be reused and configured.
+    A component should return a deferent code depending on its state.
+
+      
+    We can import dinamic content in the render function with { ... }.
+
+    randomNumber = Math.floor(Math.random() * 21); 
+    
+    render(){
+        return(
+        <div>
+            <p>Random number :  { this.randomNumber }</p>  
+        </div>)
+    }
+
+    A component can be split the tag into an opening and closing tag like this:
+        <Person> ... </Person> 
+
+---------------------
+
+
+
+Props :
+    They allow us to pass information from the <App /> component for example to the
+    other components by using attributes.
+    This makes the components dinamic, configurable and flexible.
+    
+
+
+
+    App component code :
+        <Person name="Antonina" age="47">I am a woman</Person>
+
+
+    WE USE PROPS TO ACCESS THE ATTRIBUTES AND THEYR VALUES THAT WE PASSED FROM THE APP COMPONENT:
+
+    Person Component code :
+        
+        We can acces the attributes we entered from the App component by using the 'props' keyword.
+        render(){
+            return(
+            <div>
+                <h1>Person component.</h1>
+                <p>Random number : { this.randomNumber }.</p>
+                <p>My name is { this.props.name } and I am { this.props.age } years old.</p>  
+            </div>)
+        }
+
+
+--------------------------------------------
+
+
+    App component code :
+        <Person name="Antonina" age="47">I am a woman</Person>
+
+    TP ACCESS THE "I am woman" TEXT WE NEED TO USE THE "this.props.children" property !!!
+    This property is optional.
+
+
+    We can use complex html code as a children properti into the App component 
+    <Person name="Asen" age="27"> 
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+    </Person> 
+
+
+
+--------------------------
+
+
+
+state :
+    
+    Every Component has a 'state' property build in which we can change.
+    We do not have that 'state' keyword in a function-based component.
+    IT GOOD TO USE THE function-based COMPONENTS IF WE NEED A SMALL COMPONENT.
+     
+
+    The props are managed from the outside of a component.
+    The state is managed from the inside of the component.
+
+    The state is used to manage some internal data for our component.
+    BE CAREFULL WHEN YOU USE THE state KEYWORD.
+
+ITS NOT GOOD TO HVE A STATE IN EVERY COMPONENT BECAUSE ITS GETTING HARDER TO MANAGE 
+AS OUR PROJECT GROWS.
+
+
+Why cant we create our own object and skip the usage of the "skip" keyword ?
+    You can if you want to but "state" is a special keyword for reasons 
+    we will discuss later in the course.
+
+
+IMPORTANT:
+    The "this" keyword refers to the class itself !!!!!!!!!!!! 
+
+
+--------------------
+
+
+Handling events with methods :
+    In JSX it's not onclick="" but its' onClick={...}
+
+    IMPORTANT :
+        When we create functions in a Component it's good to use the ES6 arrow functions    
+        assigned to properties.
+        This way the "this" keyword will point to our component class !!!  
+        
+        ALWAYS USE PROPERTIES WITH VALUES OF AN ARROW FUNCTION.
+
+     
+    We have many other type of events to which we can listen !!!!!!!!!!!!!!!!!
+    https://reactjs.org/docs/events.html#supported-events
+
+
+------------------
+
+
+Change the state insade a function :
+    To change the state we need to use the setState() function.
+    If we change the state manually ReactJS will not recognize it and we will 
+    get a warning in the console.
+
+    The Component object has a "setState()" method.  
+
+    setState() function accepts an object in which we can update parts of the 
+    actual state or the entire state if we want to.
+
+
+-------------------
+
+
+We dont have state into a function-based components.
+
+Try to use them more because they are easy, simple and clear about what they do.
+They are olso dinamic.
+
+
+---------------------
+
+
+Passong Method Reference Between Components :
+
+WE CAN LISTEN FOR AN EVENT INSADE A COMPONENT AND THEN CHANGE SOMETHING 
+INTO ANOTHER COMPONENT !!!
+
+We pass the function as a property and then use it insade the child component.
+
+We can use the .bind() method to some properties also and pass them as arguments of that function.
+    <button onClick={() => this.switchName("Nakso", "Asi", "Mama")}>Switch Name</button>
+
+Another way to pass properties from a child component to a parent component's function is to use 
+    an arrow function instead of .bind()
+    <button onClick={this.switchName.bind(this, "Nakso", "Asi", "Mama")}>Switch Name</button>
+
+ITS BETTER TO USE .bind() BECAUSE THE ARROW FUNCTION METHOD CAN BE INNEFFICIENT SOMETIMES ON BIGGER PROJECTS.
+
+
+---------------------
+
+
+Two way binding :
+    We can listen for a  onChange event and change the value of an input dinamically.
+    We pass the reference of a function like before from the parent component to the child component.
+    Then we use that function from the child component when the onChange event is triggered.
+
+
+----------------------
+
+
+Styling components :
+
+    There are 2 main ways of styling our application:
+
+    01. By adding a new .css file into our component.
+        We add a .css file to our component with the same name.
+        For example if your component is called Person and you have a Person.js or Person.jx file
+        you need to have a Person.css file in that same folder.
+
+        Thanks to WebPack we can import a .css file into a .js file.
+        To apply the .css into the omponent we need to import it into the component.  
+
+    02. Inline Styling - Just create an oject with styles properties and values in it and use it to stile a component.
+        There is no need for an additional .css file here.
+        IT'S DIFFICULT TO CREATE HOVER EFFECTS LIKE THIS.
+
+
+    Example :
+
+    //WE WILL STYLE THE BUTTON WITHOUT AN ADDITIONAL FILE:
+    const style = {
+      backgroundColor : 'white',
+      font : 'Ariel',
+      border : '1px solid black',
+      padding : '16px',
+      cursor : 'pointer'
+    }
+
+    //To apply the inline styles: 
+    <button style={style}>Switch Name</button>
+        
